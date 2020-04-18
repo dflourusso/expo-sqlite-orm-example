@@ -1,6 +1,6 @@
 import * as faker from 'faker'
 import React, { useCallback, useState } from 'react'
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native'
 import Person from './Person'
 
 export default function App() {
@@ -20,6 +20,12 @@ export default function App() {
     await person.save()
     setPeople(await Person.query())
   }, [])
+
+  if (Platform.OS === 'web') {
+    return <View style={styles.container}>
+      <Text>Not supported in web platform</Text>
+    </View>
+  }
 
   return (
     <View style={styles.container}>
